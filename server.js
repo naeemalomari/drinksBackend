@@ -8,37 +8,43 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-const PORT = process.env.PORT || 6000; // I AM USING THIS PORT 
+const PORT = process.env.PORT || 3050; // I AM USING THIS PORT 
 const getDrinksData = require('./controller/drink.controller')
+
+const crud = require('./controller/drink.crud.controller');
+
+
 const mongoose = require('mongoose');
-const crud = require('./controller/drink.crud.controller')
-mongoose.connect('mongodb://localhost:27017/drink',   {
+
+
+mongoose.connect('mongodb://localhost:27017/drinks',
+{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 });
 
-//http://localhost:6000/drink
+//http://localhost:3050/drink
 server.get('/drink', getDrinksData);
 
 
-//http://localhost:6000/test
+//http://localhost:3050/test
 server.get('/test', (req, res) => {
     res.send('SERVER IS WORKING FINE WELCOME TO OUR APPLICATION')
 })
 /////////////////////////// CRUD /////////////////////////////
 
-//http://localhost:6000/drink/favorite
+//http://localhost:3050/drink/favorite
 server.post('/drink/favorite', crud.createFavoriteDrink);
 
-//http://localhost:6000/drink/favorite
+//http://localhost:3050/drink/favorite
 server.get('/drink/favorite', crud.getFavoriteDrink)
 
-//http://localhost:6000/drink/favorite/slug
-server.delete('/drink/favorite/:slug', crud.deleteFavoriteDrink)
+//http://localhost:3050/drink/favorite/:slug
+server.delete('/drink/favorite/:slug', crud.deleteFavoriteDrink);
 
-//http://localhost:6000/drink/favorite/slug
-server.put('/drink/favorite/:slug',crud.updateFavoriteDrinks )
+//http://localhost:3050/drink/favorite/:slug
+server.put('/drink/favorite/:slug',crud.updateFavoriteDrinks );
 
 ///////////////////////////////////////////////////////////////
 server.listen(PORT ,() => {

@@ -2,8 +2,13 @@
 
 const mongoose = require('mongoose');
 
-
-const drinksSchema = mongoose.Schema({
+const drinksSchema = new mongoose.Schema({
+    // email:{
+    //     type: String,
+    //     unique: true,
+    //     lowercase:true,
+    //     trim:true,
+    // },
     strDrink:{
         type: String,
         unique: true,
@@ -20,5 +25,5 @@ const drinksSchema = mongoose.Schema({
     idDrink:String,
 });
 
-const favDrinkModel =mongoose.model('drinks', drinksSchema)
+const favDrinkModel =mongoose.model('khaledDrinks', drinksSchema)
 module.exports = favDrinkModel;
